@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es" data-bs-theme="light">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Despensa</title>
+  <meta name="description" content="Control de existencias, caducidades y movimientos de tu despensa.">
+  <link rel="icon"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231f4b43'/%3E%3Cpath d='M9 12h14v13a2 2 0 0 1-2 2H11a2 2 0 0 1-2-2zM11 7h10v3H11z' fill='%23f6f7f5'/%3E%3C/svg%3E">
+
+  <script>
+    // Las cookies de sesión y CORS dependen del nombre del sitio: se usa siempre "localhost" (Live Server abre "127.0.0.1" por defecto).
+    if (location.hostname === "127.0.0.1") location.replace(location.href.replace("127.0.0.1", "localhost"));
+    // Tema guardado (si el navegador permite guardarlo).
+    try {
+      var tema = localStorage.getItem("despensa.tema");
+      if (tema === "dark" || tema === "light") document.documentElement.setAttribute("data-bs-theme", tema);
+      else if (window.matchMedia("(prefers-color-scheme: dark)").matches) document.documentElement.setAttribute("data-bs-theme", "dark");
+    } catch (e) { /* sin almacenamiento: se queda el tema claro */ }
+  </script>
+
+  <link rel="stylesheet" href="vendor/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="vendor/bootstrap-icons/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+
+<body>
+  <a class="saltar" href="#vista">Saltar al contenido</a>
+
+  <div id="app" class="app" hidden>
+    <!-- Barra lateral (pantallas grandes) -->
+    <aside class="lateral" aria-label="Navegación principal">
+      <a class="marca" href="#/">
+        <span class="marca-icono"><i class="bi bi-basket3-fill"></i></span>
+        <span class="marca-nombre">Despensa</span>
+      </a>
+      <nav class="nav flex-column gap-1" id="nav-lateral"></nav>
+      <div class="lateral-pie">
+        <div class="usuario" id="usuario-correo" title=""></div>
+        <div class="d-flex gap-2">
+          <button class="btn btn-sm btn-outline-secondary flex-fill" id="btn-tema" type="button"
+            title="Cambiar entre tema claro y oscuro">
+            <i class="bi bi-moon-stars"></i><span class="visually-hidden">Cambiar tema</span>
+          </button>
+          <button class="btn btn-sm btn-outline-secondary flex-fill" id="btn-salir" type="button">
+            <i class="bi bi-box-arrow-right"></i> Salir
+          </button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Barra superior (móvil y tablet) -->
+    <header class="superior">
+      <a class="marca" href="#/">
+        <span class="marca-icono"><i class="bi bi-basket3-fill"></i></span>
+        <span class="marca-nombre">Despensa</span>
+      </a>
+      <div class="d-flex gap-1">
+        <button class="btn btn-sm btn-outline-secondary" id="btn-tema-movil" type="button" title="Cambiar tema">
+          <i class="bi bi-moon-stars"></i><span class="visually-hidden">Cambiar tema</span>
+        </button>
+        <button class="btn btn-sm btn-outline-secondary" id="btn-salir-movil" type="button">
+          <i class="bi bi-box-arrow-right"></i><span class="visually-hidden">Salir</span>
+        </button>
+      </div>
+    </header>
+
+    <main id="vista" class="vista" tabindex="-1"></main>
+
+    <!-- Navegación inferior (móvil y tablet) -->
+    <nav class="inferior" id="nav-inferior" aria-label="Navegación principal"></nav>
+  </div>
+
+  <!-- Pantalla de inicio de sesión / carga -->
+  <div id="solo" class="solo"></div>
+
+  <!-- Avisos -->
+  <div class="toast-container position-fixed bottom-0 end-0 p-3" id="avisos" aria-live="polite" aria-atomic="true">
+  </div>
+
+  <script src="vendor/bootstrap/bootstrap.bundle.min.js"></script>
+  <script type="module" src="js/app.js"></script>
+</body>
+
+</html>
